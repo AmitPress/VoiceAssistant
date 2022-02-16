@@ -1,5 +1,5 @@
 # VoiceAssistant Project
-#### Doodle is a voice assistant which can perform many mainstream voice operations.
+### Doodle is a voice assistant which can perform many mainstream voice operations.
 > Contributions are welcomed
 #### How to run this project:
 - Clone this repo
