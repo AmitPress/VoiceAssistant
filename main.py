@@ -6,7 +6,7 @@ import webbrowser
 import datetime
 import speech_recognition as sr
 import pyttsx3
-
+import pyaudio
 # Exceptions
 class NullQueryException(Exception):
     pass
@@ -111,6 +111,7 @@ if __name__ == '__main__':
         if not count.value == 5:
             q = get_command(user,assistant)
         else:
+            speak_up("Terminating for inactivity")
             break
         if not q:
             count()

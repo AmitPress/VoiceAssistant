@@ -3,3 +3,4 @@ playsound==1.2.2
 gtts
 pyttsx3
 wikipedia
+pipwin

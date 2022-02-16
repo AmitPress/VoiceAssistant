@@ -5,6 +5,7 @@
 - Clone this repo
 - Change drive into the project
 - Install all the required dependencies by `pip install -r requirements.txt`
+- Then do `pipwin install pyaudio`
 - Now, just run the `main.py` by `py main.py`
 #### Beware:
 > Check your python version for reporting any kinds of issue
