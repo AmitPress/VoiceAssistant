@@ -19,5 +19,3 @@ Means to achieve the goal:
 - It requires network connection.
 - anomalies:
     - `Search google in youtube`
-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
-https://github.com/AmitPress/VoiceAssistant.git
