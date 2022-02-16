@@ -20,3 +20,4 @@ Means to achieve the goal:
 - anomalies:
     - `Search google in youtube`
 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
+https://github.com/AmitPress/VoiceAssistant.git
