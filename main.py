@@ -8,6 +8,9 @@ import speech_recognition as sr
 import pyttsx3
 import pyaudio
 import wikipedia
+from datetime import datetime
+import requests
+import json
 # Exceptions
 class NullQueryException(Exception):
     pass
@@ -67,7 +70,7 @@ def speak_up(audio):
     engine.runAndWait()
 
 def greetings():
-    clock = int(datetime.datetime.now().hour)
+    clock = int(datetime.now().hour)
     if clock>=6 and clock<12:
         speak_up("Good Morning")
     elif clock>=12 and clock<18:
@@ -126,11 +129,36 @@ def take_action(query):
         term = query.split("for")[-1].split("in")[0]
         speak_up(f"Searching for {term} in udemy")
         webbrowser.get().open(f"https://www.udemy.com/courses/search/?src=ukw&q={term}")
-    if there_exists(query, "what time is it") or there_exists(query, "whats the time is it") and there_exists(query, "tell me the time"):
-        clk = 
-        speak_up(f"Searching for {term} in udemy")
-    
+    # Voice Clock
+    if there_exists(query, "what time is it") or there_exists(query, "what's the time") or there_exists(query, "what is the time") or there_exists(query, "tell me the time"):
+        clk = datetime.now()
+        current_time = clk.strftime("%I:%M %p")
+        print(current_time)
+        speak_up(f"It's {current_time}")
+    # location from google map
+    if there_exists(query, "what is my location") or there_exists(query, "where am I right now") or there_exists(query, "where am i"):
+        info = requests.get("http://ipinfo.io/json")
+        json = info.json()
+        # print(json)
+        # print(json['city']+' '+json['region'])
+        speak_up(f"You are now at {json['city']} in {json['region']} ")
+        loc = json['loc']
+        latlong = loc.split(',')
+        lat = latlong[0]
+        long = latlong[1]
+        webbrowser.get().open(f'https://www.google.com/maps/search/?api=1&query={long}%2C-{lat}')
+        # print(lat+' '+long)
+    # casual dialogues
+    if not q and there_exists(q, "hey") or there_exists(q, "hello") or there_exists(q, "hi") or there_exists(q, "there"):
+        speak_up(f"Hope its going well {user.get_name()}")
+    if not q and there_exists(q, "thanks") or there_exists(q, "thanks"):
+        speak_up("youre most welcome sir")
+    if not q and there_exists(q, "whats going on"):
+        speak_up("what do you like to hear")
+    if not q and there_exists(q, "who will"):
+        speak_up("I don't know sir")
 
+    
 if __name__ == '__main__':
     # initial setup
     engine = pyttsx3.init('sapi5')
@@ -142,14 +170,16 @@ if __name__ == '__main__':
     greetings()
     count = Counter()
     while True:
-        if not count.value == 5:
+        if not count.value == 4:
             q = get_command(user,assistant)
+            if count.value == 2:
+                speak_up("How can I serve you")
         else:
-            speak_up("Terminating for inactivity")
+            speak_up("Im gonna sleep")
             break
         if not q:
             count()
             continue
-        if not q and there_exists(q, "hey") or there_exists(q, "hello") or there_exists(q, "hi") or there_exists(q, "there"):
-            speak_up(f"Hope its going well {user.get_name()}")
+        else:
+            count.reset()
         take_action(q)
