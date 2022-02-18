@@ -19,3 +19,12 @@ Means to achieve the goal:
 - It requires network connection.
 - anomalies:
     - `Search google in youtube`
+
+# feature
+- google
+- youtube
+- wikipedia
+- time
+- location
+- udemy
+- 

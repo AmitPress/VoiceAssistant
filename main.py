@@ -102,16 +102,17 @@ def there_exists(query, words):
     return output
     
 def take_action(query):
+    # Google Search
     if there_exists(query, "search for Google"):
         term = query.split("for")[-1].split("in")[0]
         speak_up(f"Searching for {term} in google")
-        webbrowser.open(f"https://www.google.com/search?q={term}")
-    
+        webbrowser.get().open(f"https://www.google.com/search?q={term}")
+    # YouTube search
     if there_exists(query, "search for YouTube"):
         term = query.split("for")[-1].split("in")[0]
         speak_up(f"Searching for {term} in youtube")
-        webbrowser.open(f"https://www.youtube.com/results?search_query={term}")
-    
+        webbrowser.get().open(f"https://www.youtube.com/results?search_query={term}")
+    # Wikipedia Search
     if there_exists(query, "search for Wikipedia"):
         term = query.split("for")[-1].split("in")[0]
         speak_up(f"Searching for {term} in wikipedia")
@@ -120,6 +121,12 @@ def take_action(query):
             speak_up(result)
         except:
             speak_up("could not found the key")
+    # Udemy Course Search
+    if there_exists(query, "search for udemy"):
+        term = query.split("for")[-1].split("in")[0]
+        speak_up(f"Searching for {term} in udemy")
+        webbrowser.get().open(f"https://www.udemy.com/courses/search/?src=ukw&q={term}")
+    
 
 if __name__ == '__main__':
     # initial setup
