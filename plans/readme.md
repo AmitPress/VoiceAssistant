@@ -27,4 +27,4 @@ Means to achieve the goal:
 - time (status: not done)
 - location (status: not done)
 - udemy (status: done)
-- settings change (status: done)
+- settings change (status: not done)
