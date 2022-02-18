@@ -7,6 +7,7 @@ import datetime
 import speech_recognition as sr
 import pyttsx3
 import pyaudio
+import wikipedia
 # Exceptions
 class NullQueryException(Exception):
     pass
@@ -93,9 +94,32 @@ def get_command(user,va):
     except sr.UnknownValueError:
         query = None
     return query
+def there_exists(query, words):
+    output = True
+    for word in words.split(" "):
+        if not word in query.split(" "):
+            output = False
+    return output
+    
 def take_action(query):
-    if 'wikipedia' in query:
-        speak_up("searching is wiki")
+    if there_exists(query, "search for Google"):
+        term = query.split("for")[-1].split("in")[0]
+        speak_up(f"Searching for {term} in google")
+        webbrowser.open(f"https://www.google.com/search?q={term}")
+    
+    if there_exists(query, "search for YouTube"):
+        term = query.split("for")[-1].split("in")[0]
+        speak_up(f"Searching for {term} in youtube")
+        webbrowser.open(f"https://www.youtube.com/results?search_query={term}")
+    
+    if there_exists(query, "search for Wikipedia"):
+        term = query.split("for")[-1].split("in")[0]
+        speak_up(f"Searching for {term} in wikipedia")
+        try:
+            result = wikipedia.summary(term, sentences=2)
+            speak_up(result)
+        except:
+            speak_up("could not found the key")
 
 if __name__ == '__main__':
     # initial setup
@@ -116,4 +140,6 @@ if __name__ == '__main__':
         if not q:
             count()
             continue
+        if not q and there_exists(q, "hey") or there_exists(q, "hello") or there_exists(q, "hi") or there_exists(q, "there"):
+            speak_up(f"Hope its going well {user.get_name()}")
         take_action(q)

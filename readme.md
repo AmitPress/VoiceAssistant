@@ -16,4 +16,4 @@
 - Make an issue discussing the requirements and discrepancies
 - Then just make a PR
 - Please follow the standard conventions while performing the steps as well
-**Further queries at [FB/amit](https://fb.me/profileoamint)**
+**Further queries at [FB/amit](https://fb.me/profileoamit)**
