@@ -21,10 +21,10 @@ Means to achieve the goal:
     - `Search google in youtube`
 
 # feature
-- google
-- youtube
-- wikipedia
-- time
-- location
-- udemy
-- 
+- google (status: done)
+- youtube (status: done)
+- wikipedia (status: done)
+- time (status: not done)
+- location (status: not done)
+- udemy (status: done)
+- settings change (status: done)

@@ -126,6 +126,9 @@ def take_action(query):
         term = query.split("for")[-1].split("in")[0]
         speak_up(f"Searching for {term} in udemy")
         webbrowser.get().open(f"https://www.udemy.com/courses/search/?src=ukw&q={term}")
+    if there_exists(query, "what time is it") or there_exists(query, "whats the time is it") and there_exists(query, "tell me the time"):
+        clk = 
+        speak_up(f"Searching for {term} in udemy")
     
 
 if __name__ == '__main__':
