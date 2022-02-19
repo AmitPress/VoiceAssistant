@@ -105,6 +105,39 @@ def there_exists(query, words):
     return output
     
 def take_action(query):
+    # assingments
+    user = User()
+    assistant = VA()
+    q = query
+    # user settings
+    if there_exists(query, "what's your name") or there_exists(query, "what is your name") or there_exists(query, "tell me your name"):
+        speak_up(f"my name is {assistant.get_name()}")
+    
+    if there_exists(query, "change your name to"):
+        term = query.split('to')[-1]
+        assistant.set_name(term)
+        speak_up(f"from now my name is {term}")
+        return
+    if there_exists(query, "change your name"):
+        speak_up("what should be my name sir")
+        q = get_command(user, assistant)
+        if not q:
+            q = "Doodle"
+        assistant.set_name(q)
+        speak_up(f"from now my name is {q}")
+    if there_exists(query, "change my name to"):
+        term = query.split('to')[-1]
+        user.set_name(term)
+        speak_up(f"from now your name is {term}")
+        return
+    if there_exists(query, "change my name"):
+        speak_up("what should be your name sir")
+        q = get_command(user, assistant)
+        if not q:
+            q = "Amit"
+        user.set_name(q)
+        speak_up(f"from now your name is {q}")
+    
     # Google Search
     if there_exists(query, "search for Google"):
         term = query.split("for")[-1].split("in")[0]
@@ -150,10 +183,11 @@ def take_action(query):
         # print(lat+' '+long)
     # casual dialogues
     if not q and there_exists(q, "hey") or there_exists(q, "hello") or there_exists(q, "hi") or there_exists(q, "there"):
+        
         speak_up(f"Hope its going well {user.get_name()}")
     if not q and there_exists(q, "thanks") or there_exists(q, "thanks"):
         speak_up("youre most welcome sir")
-    if not q and there_exists(q, "whats going on"):
+    if not q and there_exists(q, "what's going on"):
         speak_up("what do you like to hear")
     if not q and there_exists(q, "who will"):
         speak_up("I don't know sir")
