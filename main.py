@@ -137,26 +137,44 @@ def take_action(query):
             q = "Amit"
         user.set_name(q)
         speak_up(f"from now your name is {q}")
+    if there_exists(query, "change your voice to"):
+        gender = query.split("to")[-1].strip()
+        if not gender:
+            gender = 'male'
+        if gender == 'male':
+            engine.setProperty("voice", voices[0].id)
+        elif gender == 'female':
+            engine.setProperty("voice", voices[1].id)
+        else:
+            engine.setProperty("voice", voices[0].id)
+        speak_up(f"I am now {gender}")
     
     # Google Search
     if there_exists(query, "search for Google"):
         term = query.split("for")[-1].split("in")[0]
         speak_up(f"Searching for {term} in google")
         webbrowser.get().open(f"https://www.google.com/search?q={term}")
+        return
     # YouTube search
     if there_exists(query, "search for YouTube"):
         term = query.split("for")[-1].split("in")[0]
         speak_up(f"Searching for {term} in youtube")
         webbrowser.get().open(f"https://www.youtube.com/results?search_query={term}")
+        return
     # Wikipedia Search
-    if there_exists(query, "search for Wikipedia"):
-        term = query.split("for")[-1].split("in")[0]
+    if there_exists(query, "inform me about"):
+        term = query.split("about")[-1]
         speak_up(f"Searching for {term} in wikipedia")
         try:
             result = wikipedia.summary(term, sentences=2)
             speak_up(result)
         except:
             speak_up("could not found the key")
+    # anime search
+    if there_exists(query, "search for anime"):
+        term = query.split("for")[-1].split("anime")[0]
+        speak_up(f"Searching for {term} in animixplay")
+        webbrowser.get().open(f"https://animixplay.to/?q={term}")
     # Udemy Course Search
     if there_exists(query, "search for udemy"):
         term = query.split("for")[-1].split("in")[0]
@@ -185,9 +203,9 @@ def take_action(query):
     if not q and there_exists(q, "hey") or there_exists(q, "hello") or there_exists(q, "hi") or there_exists(q, "there"):
         
         speak_up(f"Hope its going well {user.get_name()}")
-    if not q and there_exists(q, "thanks") or there_exists(q, "thanks"):
+    if not q and there_exists(q, "thanks") or there_exists(q, "thank you"):
         speak_up("youre most welcome sir")
-    if not q and there_exists(q, "what's going on"):
+    if not q and there_exists(q, "what's going on") or there_exists(q, "what is going on"):
         speak_up("what do you like to hear")
     if not q and there_exists(q, "who will"):
         speak_up("I don't know sir")
